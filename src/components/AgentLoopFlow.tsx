@@ -3,10 +3,8 @@ import {
   ReactFlow,
   Background,
   Controls,
-  MiniMap,
   useNodesState,
   useEdgesState,
-  type Node,
   type NodeMouseHandler,
   BackgroundVariant,
 } from '@xyflow/react';
@@ -18,18 +16,28 @@ import type { AgentNodeData } from '../types';
 
 const nodeTypes = { agentNode: AgentNode };
 
-const miniMapNodeColor = (node: Node) => {
-  const data = node.data as AgentNodeData;
-  return data?.color ?? '#334155';
-};
+
+const HITL_NODE_ID = 'hitl';
+const HITL_EDGE_IDS = new Set(['e-llm-hitl', 'e-hitl-llm']);
 
 interface AgentLoopFlowProps {
   onNodeSelect: (data: AgentNodeData | null) => void;
+  showHitl: boolean;
 }
 
-export default function AgentLoopFlow({ onNodeSelect }: AgentLoopFlowProps) {
+export default function AgentLoopFlow({ onNodeSelect, showHitl }: AgentLoopFlowProps) {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+
+  const visibleNodes = useMemo(
+    () => (showHitl ? nodes : nodes.filter((n) => n.id !== HITL_NODE_ID)),
+    [nodes, showHitl],
+  );
+
+  const visibleEdges = useMemo(
+    () => (showHitl ? edges : edges.filter((e) => !HITL_EDGE_IDS.has(e.id))),
+    [edges, showHitl],
+  );
 
   const handleNodeClick: NodeMouseHandler = useCallback(
     (_event, node) => {
@@ -49,8 +57,8 @@ export default function AgentLoopFlow({ onNodeSelect }: AgentLoopFlowProps) {
 
   return (
     <ReactFlow
-      nodes={nodes}
-      edges={edges}
+      nodes={visibleNodes}
+      edges={visibleEdges}
       nodeTypes={nodeTypes}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
@@ -76,15 +84,7 @@ export default function AgentLoopFlow({ onNodeSelect }: AgentLoopFlowProps) {
           borderRadius: 8,
         }}
       />
-      <MiniMap
-        nodeColor={miniMapNodeColor}
-        style={{
-          background: '#0d1526',
-          border: '1px solid #1e2d4a',
-          borderRadius: 8,
-        }}
-        maskColor="rgba(7,12,24,0.7)"
-      />
+
     </ReactFlow>
   );
 }

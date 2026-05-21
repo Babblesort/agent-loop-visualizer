@@ -5,7 +5,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'system-prompt',
     type: 'agentNode',
-    position: { x: 50, y: 30 },
+    position: { x: 55, y: 20 },
     data: {
       label: 'System Prompt',
       subtitle: 'Persistent context & constraints',
@@ -25,7 +25,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'user-prompt',
     type: 'agentNode',
-    position: { x: 510, y: 30 },
+    position: { x: 520, y: 20 },
     data: {
       label: 'User Prompt',
       subtitle: 'Current turn input',
@@ -45,7 +45,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'llm',
     type: 'agentNode',
-    position: { x: 280, y: 210 },
+    position: { x: 285, y: 190 },
     data: {
       label: 'LLM Inference',
       subtitle: 'Core reasoning engine',
@@ -65,7 +65,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'tool-request',
     type: 'agentNode',
-    position: { x: 50, y: 420 },
+    position: { x: 156, y: 551 },
     data: {
       label: 'Tool Call Request',
       subtitle: 'Structured function invocation',
@@ -85,7 +85,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'hitl',
     type: 'agentNode',
-    position: { x: 330, y: 420 },
+    position: { x: 281, y: 299 },
     data: {
       label: 'Human-in-the-Loop',
       subtitle: 'Approval gate',
@@ -105,7 +105,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'final-response',
     type: 'agentNode',
-    position: { x: 590, y: 420 },
+    position: { x: 414, y: 550 },
     data: {
       label: 'Final Response',
       subtitle: 'Task complete — answer delivered',
@@ -125,7 +125,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'tool-executor',
     type: 'agentNode',
-    position: { x: 50, y: 590 },
+    position: { x: 155, y: 664 },
     data: {
       label: 'Tool Executor',
       subtitle: 'Inner loop — function runs here',
@@ -145,7 +145,7 @@ export const initialNodes: Node<AgentNodeData>[] = [
   {
     id: 'tool-output',
     type: 'agentNode',
-    position: { x: 50, y: 760 },
+    position: { x: 148, y: 785 },
     data: {
       label: 'Tool Output',
       subtitle: 'Result packaged back into context',
@@ -220,11 +220,13 @@ export const initialEdges: Edge[] = [
     labelStyle: { fill: '#22c55e', fontWeight: 600, fontSize: 11 },
     labelBgStyle: { fill: '#0a0f1e', fillOpacity: 0.85 },
   },
-  // HITL → LLM (back edge)
+  // HITL → LLM (back edge — arcs around the RIGHT side of the canvas)
   {
     id: 'e-hitl-llm',
     source: 'hitl',
+    sourceHandle: 'right-source',
     target: 'llm',
+    targetHandle: 'right-target',
     label: '② approved / rejected',
     type: 'smoothstep',
     style: { stroke: '#f97316', strokeWidth: 1.5, strokeDasharray: '5 3' },
@@ -254,11 +256,13 @@ export const initialEdges: Edge[] = [
     labelStyle: { fill: '#14b8a6', fontWeight: 600, fontSize: 11 },
     labelBgStyle: { fill: '#0a0f1e', fillOpacity: 0.85 },
   },
-  // Tool Output → LLM (the loop-back — the key feedback arc)
+  // Tool Output → LLM (the loop-back — arcs around the LEFT side of the canvas)
   {
     id: 'e-tooloutput-llm',
     source: 'tool-output',
+    sourceHandle: 'left-source',
     target: 'llm',
+    targetHandle: 'left-target',
     label: '④ tool result → re-infer',
     type: 'smoothstep',
     animated: true,
