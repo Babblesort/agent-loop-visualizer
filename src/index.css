@@ -1,0 +1,4 @@
+/* Global reset — App.css handles all component styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

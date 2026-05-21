@@ -1,0 +1,339 @@
+/* ─── Layout ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  background: #070c18;
+  color: #e2e8f0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ─── Header ──────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #0d1526;
+  border-bottom: 1px solid #1e2d4a;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.app-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-logo {
+  font-size: 28px;
+  color: #f59e0b;
+  line-height: 1;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: -0.3px;
+}
+
+.app-tagline {
+  font-size: 12px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.app-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.app-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #1e3a5f;
+  color: #60a5fa;
+  border: 1px solid #2d4f7a;
+  letter-spacing: 0.3px;
+}
+
+.app-badge--dim {
+  background: #141e30;
+  color: #475569;
+  border-color: #1e2d4a;
+}
+
+/* ─── Body ────────────────────────────────────────────── */
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-canvas {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────── */
+.app-sidebar {
+  width: 340px;
+  flex-shrink: 0;
+  background: #0d1526;
+  border-left: 1px solid #1e2d4a;
+  overflow-y: auto;
+}
+
+/* ─── Info Panel ──────────────────────────────────────── */
+.info-panel {
+  padding: 24px 20px;
+}
+
+.info-panel--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.info-panel-hint-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.info-panel--empty h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+}
+
+.info-panel--empty p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.info-panel-legend {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.legend-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Selected node panel ─────────────────────────────── */
+.info-panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #111d32;
+  border-radius: 8px;
+  border-left: 3px solid #334155;
+  margin-bottom: 16px;
+}
+
+.info-panel-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+.info-panel-subtitle {
+  font-size: 11px;
+  color: #475569;
+  margin-top: 3px;
+}
+
+.info-panel-description {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.info-panel-details {
+  background: #0a1220;
+  border: 1px solid #1e2d4a;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.info-panel-details-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.info-panel-details ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-panel-details li {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #64748b;
+  padding-left: 14px;
+  position: relative;
+}
+
+.info-panel-details li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--bullet, #334155);
+  font-size: 10px;
+  top: 1px;
+}
+
+/* ─── Custom React Flow nodes ─────────────────────────── */
+.agent-node {
+  background: #111d32;
+  border: 1.5px solid #1e2d4a;
+  border-left: 3px solid var(--accent, #334155);
+  border-radius: 8px;
+  padding: 10px 14px;
+  min-width: 190px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.agent-node:hover {
+  border-color: var(--accent, #334155);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.agent-node.selected {
+  border-color: var(--accent, #334155);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent),
+    0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.agent-node-icon {
+  font-size: 18px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.agent-node-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.agent-node-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+}
+
+.agent-node-subtitle {
+  font-size: 10px;
+  color: #475569;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* ─── React Flow overrides ────────────────────────────── */
+.react-flow__attribution {
+  background: transparent !important;
+}
+
+.react-flow__attribution a {
+  color: #334155 !important;
+}
+
+.react-flow__controls button {
+  background: #0d1526 !important;
+  border-color: #1e2d4a !important;
+  color: #64748b !important;
+  fill: #64748b !important;
+}
+
+.react-flow__controls button:hover {
+  background: #111d32 !important;
+  color: #94a3b8 !important;
+  fill: #94a3b8 !important;
+}
+
+.react-flow__edge-label {
+  pointer-events: none;
+}
