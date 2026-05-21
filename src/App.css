@@ -86,6 +86,49 @@ html, body, #root {
   border-color: #1e2d4a;
 }
 
+/* ─── HITL toggle button ──────────────────────────────── */
+.hitl-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #0d1526;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.hitl-toggle:hover {
+  border-color: #64748b;
+  color: #94a3b8;
+}
+
+.hitl-toggle--on {
+  border-color: #f97316;
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.08);
+}
+
+.hitl-toggle--on:hover {
+  border-color: #fb923c;
+  color: #fb923c;
+  background: rgba(249, 115, 22, 0.14);
+}
+
+.hitl-toggle-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
 /* ─── Body ────────────────────────────────────────────── */
 .app-body {
   display: flex;

@@ -10,6 +10,7 @@ function AgentNode({ data, selected }: NodeProps & { data: AgentNodeData }) {
     >
       <Handle type="target" position={Position.Top} />
       <Handle type="target" position={Position.Left} id="left-target" />
+      <Handle type="target" position={Position.Right} id="right-target" />
       <div className="agent-node-icon">{data.icon}</div>
       <div className="agent-node-body">
         <div className="agent-node-label">{data.label}</div>
@@ -17,6 +18,7 @@ function AgentNode({ data, selected }: NodeProps & { data: AgentNodeData }) {
       </div>
       <Handle type="source" position={Position.Bottom} />
       <Handle type="source" position={Position.Right} id="right-source" />
+      <Handle type="source" position={Position.Left} id="left-source" />
     </div>
   );
 }

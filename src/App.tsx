@@ -6,10 +6,21 @@ import './App.css';
 
 export default function App() {
   const [selectedNode, setSelectedNode] = useState<AgentNodeData | null>(null);
+  const [showHitl, setShowHitl] = useState(false);
 
   const handleNodeSelect = useCallback((data: AgentNodeData | null) => {
     setSelectedNode(data);
   }, []);
+
+  const handleToggleHitl = useCallback(() => {
+    setShowHitl((prev) => {
+      // If hiding HITL while it's selected, clear the sidebar
+      if (prev && selectedNode?.label === 'Human-in-the-Loop') {
+        setSelectedNode(null);
+      }
+      return !prev;
+    });
+  }, [selectedNode]);
 
   return (
     <div className="app">
@@ -24,14 +35,22 @@ export default function App() {
           </div>
         </div>
         <div className="app-header-right">
-          <span className="app-badge">React Flow</span>
-          <span className="app-badge app-badge--dim">Click nodes to explore</span>
+          <button
+            className={`hitl-toggle${showHitl ? ' hitl-toggle--on' : ''}`}
+            onClick={handleToggleHitl}
+            title={showHitl ? 'Hide Human-in-the-Loop node' : 'Show Human-in-the-Loop node'}
+          >
+            <span>🙋</span>
+            <span>Human-in-the-Loop</span>
+            <span className="hitl-toggle-indicator" />
+          </button>
+
         </div>
       </header>
 
       <div className="app-body">
         <div className="app-canvas">
-          <AgentLoopFlow onNodeSelect={handleNodeSelect} />
+          <AgentLoopFlow onNodeSelect={handleNodeSelect} showHitl={showHitl} />
         </div>
 
         <aside className="app-sidebar">
