@@ -229,8 +229,9 @@ export const initialEdges: Edge[] = [
     targetHandle: 'right-target',
     label: '② approved / rejected',
     type: 'smoothstep',
-    style: { stroke: '#f97316', strokeWidth: 1.5, strokeDasharray: '5 3' },
-    labelStyle: { fill: '#f97316', fontWeight: 500, fontSize: 11 },
+    animated: true,
+    style: { stroke: '#f97316', strokeWidth: 2 },
+    labelStyle: { fill: '#f97316', fontWeight: 600, fontSize: 11 },
     labelBgStyle: { fill: '#0a0f1e', fillOpacity: 0.85 },
   },
   // Tool chain inner loop
